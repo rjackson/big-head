@@ -1,0 +1,10 @@
+version: "2"
+services:
+  sensor:
+    image: balenablocks/sensor
+    privileged: true
+    environment:
+      - RAW_VALUES=0
+      - COLLAPSE_FIELDS=1
+      - MQTT_ADDRESS=${MQTT_ADRESS}
+      - MQTT_PUB_TOPIC=bme680

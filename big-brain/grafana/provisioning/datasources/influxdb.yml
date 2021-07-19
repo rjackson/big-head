@@ -1,0 +1,16 @@
+apiVersion: 1
+datasources:
+- orgId: 1
+  version: 2
+  name: InfluxDB (bme680)
+  type: influxdb
+  access: proxy
+  url: ${INFLUXDB_ADDRESS}
+  basicAuth: true
+  jsonData:
+    defaultBucket: bme680
+    httpMode: POST
+    organization: roberts-house
+    version: Flux
+  secureJsonData:
+    token: ${INFLUXDB_TOKEN}
