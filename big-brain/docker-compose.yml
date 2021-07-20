@@ -10,17 +10,13 @@ services:
       - ./mosquitto/data:/mosquitto/data
       - ./mosquitto/log:/mosquitto/log
   influxdb:
-    image: influxdb:2.0
+    image: influxdb:1.8
     volumes:
       - ./influxdb/config/:/etc/influxdb2
       - ./influxdb/data/:/var/lib/influxdb2
     environment:
-      - DOCKER_INFLUXDB_INIT_MODE=setup
-      - DOCKER_INFLUXDB_INIT_ORG=${INFLUXDB_ORG}
-      - DOCKER_INFLUXDB_INIT_BUCKET=${INFLUXDB_BUCKET}
-      - DOCKER_INFLUXDB_INIT_USERNAME=${INFLUXDB_USERNAME}
-      - DOCKER_INFLUXDB_INIT_PASSWORD=${INFLUXDB_PASSWORD}
-      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${INFLUXDB_TOKEN}
+      - INFLUXDB_ADMIN_USER_USERNAME=${INFLUXDB_USERNAME}
+      - INFLUXDB_ADMIN_USER_PASSWORD=${INFLUXDB_PASSWORD}
   telegraf:
     image: telegraf:1.19
     volumes:
@@ -28,9 +24,9 @@ services:
     environment:
       - MQTT_ADDRESS=tcp://mqtt:1883
       - INFLUXDB_ADDRESS=http://influxdb:8086
-      - INFLUXDB_TOKEN=${INFLUXDB_TOKEN}
-      - INFLUXDB_ORG=${INFLUXDB_ORG}
-      - INFLUXDB_BUCKET=${INFLUXDB_BUCKET}
+      - INFLUXDB_USERNAME=${INFLUXDB_USERNAME}
+      - INFLUXDB_PASSWORD=${INFLUXDB_PASSWORD}
+      - INFLUXDB_DATABASE=${INFLUXDB_DATABASE}
   grafana:
     image: grafana/grafana:7.5.10
     ports:
@@ -41,5 +37,6 @@ services:
       - ./grafana/provisioning:/etc/grafana/provisioning
     environment:
       - INFLUXDB_ADDRESS=http://influxdb:8086
-      - INFLUXDB_TOKEN=${INFLUXDB_TOKEN}
-      
+      - INFLUXDB_USERNAME=${INFLUXDB_USERNAME}
+      - INFLUXDB_PASSWORD=${INFLUXDB_PASSWORD}
+      - INFLUXDB_DATABASE=${INFLUXDB_DATABASE}
