@@ -11,6 +11,7 @@ services:
       - ./mosquitto/log:/mosquitto/log
   influxdb:
     image: influxdb:1.8
+    restart: always
     volumes:
       - ./influxdb/config/:/etc/influxdb2
       - ./influxdb/data/:/var/lib/influxdb2
@@ -19,6 +20,7 @@ services:
       - INFLUXDB_ADMIN_USER_PASSWORD=${INFLUXDB_PASSWORD}
   telegraf:
     image: telegraf:1.19
+    restart: always
     volumes:
       - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
     environment:
@@ -29,6 +31,7 @@ services:
       - INFLUXDB_DATABASE=${INFLUXDB_DATABASE}
   grafana:
     image: grafana/grafana:7.5.10
+    restart: always
     ports:
       - "3000:3000"
     volumes:
