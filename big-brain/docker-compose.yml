@@ -13,8 +13,7 @@ services:
     image: influxdb:1.8
     restart: always
     volumes:
-      - ./influxdb/config/:/etc/influxdb2
-      - ./influxdb/data/:/var/lib/influxdb2
+      - ./influxdb:/root/.influxdb
     environment:
       - INFLUXDB_ADMIN_USER_USERNAME=${INFLUXDB_USERNAME}
       - INFLUXDB_ADMIN_USER_PASSWORD=${INFLUXDB_PASSWORD}
