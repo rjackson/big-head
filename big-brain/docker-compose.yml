@@ -29,7 +29,7 @@ services:
       - INFLUXDB_PASSWORD=${INFLUXDB_PASSWORD}
       - INFLUXDB_DATABASE=${INFLUXDB_DATABASE}
   grafana:
-    image: grafana/grafana:8.2.6
+    image: grafana/grafana:9.0.3
     restart: always
     ports:
       - "3000:3000"
