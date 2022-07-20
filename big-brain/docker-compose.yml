@@ -42,3 +42,8 @@ services:
       - INFLUXDB_USERNAME=${INFLUXDB_USERNAME}
       - INFLUXDB_PASSWORD=${INFLUXDB_PASSWORD}
       - INFLUXDB_DATABASE=${INFLUXDB_DATABASE}
+  cloudflare_tunnel:
+    image: cloudflare/cloudflared:2022.7.1
+    command: tunnel --no-autoupdate run
+    environment:
+      - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
