@@ -6,6 +6,7 @@ import json
 import unit
 import network
 import ubinascii
+from machine import WDT
 
 MQTT_SERVER='192.168.86.24'
 MQTT_PORT='1883'
@@ -30,8 +31,9 @@ def tpoll():
   
   m5mqtt.publish(MQTT_TOPIC, json.dumps(data))
   blip();
+  wdt.feed()
   
-
+wdt = WDT(timeout=2000)
 env3_1 = unit.get(unit.ENV3, unit.PORTA)
 wlan_sta = network.WLAN(network.STA_IF)
 wlan_sta.active(True)
